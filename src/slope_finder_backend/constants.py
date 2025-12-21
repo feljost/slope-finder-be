@@ -36,6 +36,7 @@ ski_resorts = [
         "id": "parsenn",
         "name": "Davos Parsenn",
         "location": {"lat": 46.808398133928996, "lng": 9.838391279762277},
+        "elevation": "810m - 2844m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/parsenn-davos-klosters/snow-report/",
         "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Davos-Parsenn-01.jpg"
     },
@@ -331,7 +332,7 @@ ski_resorts = [
         "location": {"lat": 46.7761, "lng": 8.2711},
         "elevation": "1080m - 2255m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/melchsee-frutt/snow-report/",
-        "image_url": "hhttps://storage.kempinski.com/cdn-cgi/image/w=1920,f=auto,fit=scale-down,g=auto/ki-cms-prod/images/4/5/4/8/2028454-1-eng-GB/264a11ffca8b-76367395_4K.jpg"
+        "image_url": "https://storage.kempinski.com/cdn-cgi/image/w=1920,f=auto,fit=scale-down,g=auto/ki-cms-prod/images/4/5/4/8/2028454-1-eng-GB/264a11ffca8b-76367395_4K.jpg"
     },
     {
         "id": "sorenberg",
@@ -364,7 +365,7 @@ ski_resorts = [
         "location": {"lat": 46.9406, "lng": 9.0017},
         "elevation": "1256m - 1904m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/braunwald/snow-report/",
-        "image_url": "hhttps://vcdn.bergfex.at/images/resized/4a/c6d2545a5800294a_412a771dfa550243@2x.jpg"
+        "image_url": "https://vcdn.bergfex.at/images/resized/4a/c6d2545a5800294a_412a771dfa550243@2x.jpg"
     },
     {
         "id": "elm",

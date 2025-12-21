@@ -40,7 +40,7 @@ class SkiResort(BaseModel):
     id: str
     name: str
     location: Location
-    elevation: str
+    elevation: str | None
     snowreport_url: str
     image_url: str
     air_distance_km: float
