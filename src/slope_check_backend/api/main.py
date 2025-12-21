@@ -2,10 +2,11 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 
 from slope_check_backend.constants import ski_resorts
-from slope_check_backend.models import LocationQuery
 from slope_check_backend.services.routing import get_driving_distances_batch
 from slope_check_backend.services.routing import calculate_air_distance
 from slope_check_backend.services.snow_report import scrape_snow_reports_batch
+from slope_check_backend.models import Location
+from slope_check_backend.models import SkiResortsResponse
 
 app = FastAPI(title="Slope Check Backend")
 
@@ -17,10 +18,10 @@ async def health():
 
 @app.post("/ski-resorts/by-distance")
 def get_ski_resorts_by_distance(
-    location: LocationQuery,
+    location: Location,
     page: int = 1,
     page_size: int = 10,
-):
+) -> SkiResortsResponse:
     """
     Get ski resorts ordered by driving distance from the given location with pagination.
 
