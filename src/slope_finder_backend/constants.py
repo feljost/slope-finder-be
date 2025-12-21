@@ -117,7 +117,7 @@ ski_resorts = [
         "location": {"lat": 46.4740, "lng": 7.2866},
         "elevation": "1000m - 3000m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/egglila-videmanette-gstaadsaanenrougemont/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gstaad-01.jpg"
+        "image_url": "https://vcdn.bergfex.at/images/resized/6f/f689b5ed5bb3246f_7f319e914047e4b6@2x.jpg"
     },
     {
         "id": "jungfrau",
@@ -133,7 +133,7 @@ ski_resorts = [
         "location": {"lat": 46.9416, "lng": 10.3605},
         "elevation": "1400m - 2872m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/ischglsamnaun-silvretta-arena/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ischgl_Idalp.jpg"
+        "image_url": "https://www.ischgl.com/007_BERGBAHNEN/001_SSAG/anlagenbilder/l1_twinliner/100196107/image-thumb__100196107__image-grid-1/2.jpg"
     },
     {
         "id": "villars",
@@ -149,15 +149,7 @@ ski_resorts = [
         "location": {"lat": 46.7967, "lng": 10.2988},
         "elevation": "1250m - 2785m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/scuol-motta-naluns/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Scuol_Motta_Naluns.jpg"
-    },
-    {
-        "id": "flims",
-        "name": "Flims",
-        "location": {"lat": 46.8361, "lng": 9.2847},
-        "elevation": "1100m - 3018m",
-        "snowreport_url": "https://www.skiresort.info/ski-resort/laax-flims-falera/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Caumasee.jpg"
+        "image_url": "https://www.powderhounds.com/site/DefaultSite/filesystem/images/Europe/Switzerland/Scuol/overview/01.jpg"
     },
     {
         "id": "leukerbad",
@@ -173,7 +165,7 @@ ski_resorts = [
         "location": {"lat": 47.0906, "lng": 9.2828},
         "elevation": "1220m - 2222m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/flumserberg/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Skiing_lesson_at_Flumserberg.jpg"
+        "image_url": "https://www.flumserberg.ch/Bilder/Winter/Snowpark/SnwoPark%20Flumserberg/626/image-thumb__626__lightbox/leichte_Freestyle_Elemente_SnowPark_Flumserberg.d2573b14.png"
     },
     # Portes du Soleil
     {
@@ -182,7 +174,7 @@ ski_resorts = [
         "location": {"lat": 46.1748, "lng": 6.8703},
         "elevation": "1050m - 2277m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/les-portes-du-soleil-morzineavoriazles-getschatelmorginschampery/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Champery_Village.jpg"
+        "image_url": "https://www.regiondentsdumidi.ch/files/29098/banniere_champery-hiver-3-1-1920x720.jpg"
     },
     {
         "id": "morgins",
@@ -190,7 +182,7 @@ ski_resorts = [
         "location": {"lat": 46.2366, "lng": 6.8525},
         "elevation": "1350m - 2000m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/les-portes-du-soleil-morzineavoriazles-getschatelmorginschampery/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Morgins.jpg"
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkrN7zJxf11DQ7yClIGS5GcteVuiqcKWKBrQ&s"
     },
     # 4 Vallées (Specific Sectors)
     {
@@ -199,7 +191,7 @@ ski_resorts = [
         "location": {"lat": 46.1837, "lng": 7.2931},
         "elevation": "1400m - 3330m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/4-vallees-verbier-la-tzoumaz-nendaz-veysonnaz-thyon/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Haute-Nendaz_Village_2011.jpg"
+        "image_url": "https://vcdn.bergfex.at/images/resized/04/5337ab6ce395c404_001591e674303206.jpg"
     },
     {
         "id": "veysonnaz",
@@ -207,7 +199,7 @@ ski_resorts = [
         "location": {"lat": 46.2078, "lng": 7.3372},
         "elevation": "1350m - 2450m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/4-vallees-verbier-la-tzoumaz-nendaz-veysonnaz-thyon/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Piste_de_l'Ours.jpg"
+        "image_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/df/a3/f0/hotel-chalet-royal.jpg?w=1400&h=1400&s=1"
     },
     {
         "id": "thyon",
@@ -215,7 +207,7 @@ ski_resorts = [
         "location": {"lat": 46.1961, "lng": 7.3828},
         "elevation": "1500m - 2450m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/4-vallees-verbier-la-tzoumaz-nendaz-veysonnaz-thyon/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Thyon_2000.jpg"
+        "image_url": "https://cdn.indebergen.nl/media/dxbhypn5/thyon-2000-4.jpeg"
     },
     # Valais - Anniviers
     {
@@ -224,7 +216,7 @@ ski_resorts = [
         "location": {"lat": 46.1764, "lng": 7.5706},
         "elevation": "1570m - 2900m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/grimentz-zinal/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Grimentz_Village.jpg"
+        "image_url": "https://static.mycity.travel/manage/uploads/9/76/443689/1/domaine-skiable-de-grimentz-zinal-arrivee-du-pouce_800.jpg"
     },
     {
         "id": "st-luc-chandolin",
@@ -232,7 +224,7 @@ ski_resorts = [
         "location": {"lat": 46.2192, "lng": 7.6042},
         "elevation": "1650m - 3000m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/saint-lucchandolin-anniviers/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/St-Luc.jpg"
+        "image_url": "https://static.mycity.travel/manage/uploads/9/76/443040/1/domaine-skiable-de-st-luc-chandolin-arrivee-foret_800.png"
     },
     # Valais - Aletsch & Others
     {
@@ -241,7 +233,7 @@ ski_resorts = [
         "location": {"lat": 46.3908, "lng": 8.0433},
         "elevation": "1845m - 2869m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/aletsch-arena-riederalp-bettmeralp-fiesch-eggishorn/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Aletschgletscher_mit_Konkordiaplatz.jpg"
+        "image_url": "https://pistenhotels.info/img/123872/skigebiet-skigebiet-aletsch-arena-124262.jpg?h=426&w=565&mode=crop&scale=canvas&format=webp&autorotate=true"
     },
     {
         "id": "belalp",
@@ -249,7 +241,7 @@ ski_resorts = [
         "location": {"lat": 46.3575, "lng": 7.9458},
         "elevation": "1322m - 3112m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/belalp-blatten/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Belalp.jpg"
+        "image_url": "https://www.skiresort.info/fileadmin/_processed_/2b/bf/f7/73/733c291074.jpg"
     },
     {
         "id": "lauchernalp",
@@ -257,7 +249,7 @@ ski_resorts = [
         "location": {"lat": 46.4025, "lng": 7.7719},
         "elevation": "1968m - 3111m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/lauchernalp-loetschental/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lauchernalp_im_Winter.jpg"
+        "image_url": "https://wegwandern.ch/wp-content/uploads/2023/06/winterwanderung_lauchernalp_stafel_loetschental.jpg"
     },
     {
         "id": "saas-grund",
@@ -265,7 +257,7 @@ ski_resorts = [
         "location": {"lat": 46.1219, "lng": 7.9406},
         "elevation": "1559m - 3200m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/hohsaas-saas-grund/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Saas-Grund_Kreuzboden.jpg"
+        "image_url": "https://www.skiresort.ch/fileadmin/_processed_/73/39/94/47/dbac6349b3.jpg"
     },
     {
         "id": "anzere",
@@ -273,7 +265,7 @@ ski_resorts = [
         "location": {"lat": 46.2961, "lng": 7.3969},
         "elevation": "1500m - 2500m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/anzere/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Anzere_Village.jpg"
+        "image_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/2d/e9/01/anzere-tourisme-canton.jpg?w=900&h=500&s=1"
     },
     {
         "id": "ovronnaz",
@@ -298,7 +290,7 @@ ski_resorts = [
         "location": {"lat": 46.3428, "lng": 7.0117},
         "elevation": "1250m - 2331m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/leysin-les-mosses/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Leysin_village.jpg"
+        "image_url": "https://static.mycity.travel/manage/uploads/6/33/596360/2/ski-a-leyin_2000.jpg"
     },
     {
         "id": "meiringen-hasliberg",
@@ -306,7 +298,7 @@ ski_resorts = [
         "location": {"lat": 46.7333, "lng": 8.1833},
         "elevation": "1055m - 2433m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/meiringen-hasliberg/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Hasliberg_Reuti.jpg"
+        "image_url": "https://vcdn.bergfex.at/images/resized/de/edbf00a0a0f2aede_9025f2492e08f8f6@2x.jpg"
     },
     {
         "id": "lenk",
@@ -314,7 +306,7 @@ ski_resorts = [
         "location": {"lat": 46.4550, "lng": 7.4431},
         "elevation": "1068m - 2362m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/adelboden-lenk/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lenk_im_Simmental.jpg"
+        "image_url": "https://media.snow-online.de/images/ecu/entity/e_skiresort/ski-resort_adelboden-lenk_n4083-55104-1_raw.jpg"
     },
     # Central Switzerland
     {
@@ -323,7 +315,7 @@ ski_resorts = [
         "location": {"lat": 46.9744, "lng": 8.6508},
         "elevation": "1305m - 1935m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/stoos-fronalpstockklingenstock/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Stoos_Fronalpstock.jpg"
+        "image_url": "https://stoos-muotatal.ch/wp-content/uploads/2021/03/1440x960_Standseilbahn-Schwyz-Stoos-Winter.jpg"
     },
     {
         "id": "hoch-ybrig",
@@ -331,7 +323,7 @@ ski_resorts = [
         "location": {"lat": 47.0167, "lng": 8.8167},
         "elevation": "1050m - 1831m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/hoch-ybrig-unteribergoberiberg/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Hoch-Ybrig_Spirstock.jpg"
+        "image_url": "https://www.hoch-ybrig.ch/fileadmin/_processed_/4/7/csm_portrait_home_35a1331b64.jpg"
     },
     {
         "id": "melchsee-frutt",
@@ -339,7 +331,7 @@ ski_resorts = [
         "location": {"lat": 46.7761, "lng": 8.2711},
         "elevation": "1080m - 2255m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/melchsee-frutt/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Melchsee-Frutt_Dorf.jpg"
+        "image_url": "hhttps://storage.kempinski.com/cdn-cgi/image/w=1920,f=auto,fit=scale-down,g=auto/ki-cms-prod/images/4/5/4/8/2028454-1-eng-GB/264a11ffca8b-76367395_4K.jpg"
     },
     {
         "id": "sorenberg",
@@ -356,7 +348,7 @@ ski_resorts = [
         "location": {"lat": 47.0086, "lng": 9.4239},
         "elevation": "1047m - 2227m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/pizol-bad-ragaz-wangs/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Pizol_Wangs.jpg"
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Picswiss_SG-37-09.jpg"
     },
     {
         "id": "chaeserrugg",
@@ -364,7 +356,7 @@ ski_resorts = [
         "location": {"lat": 47.1681, "lng": 9.2961},
         "elevation": "900m - 2262m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/chaeserrugg-unterwasser-alt-st-johann-toggenburg/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chaeserrugg.jpg"
+        "image_url": "https://www.skiresort.ch/fileadmin/_processed_/9b/b3/33/3d/e816dc5c66.jpg"
     },
     {
         "id": "braunwald",
@@ -372,7 +364,7 @@ ski_resorts = [
         "location": {"lat": 46.9406, "lng": 9.0017},
         "elevation": "1256m - 1904m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/braunwald/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Braunwald_Glarus_Sued.jpg"
+        "image_url": "hhttps://vcdn.bergfex.at/images/resized/4a/c6d2545a5800294a_412a771dfa550243@2x.jpg"
     },
     {
         "id": "elm",
@@ -380,7 +372,7 @@ ski_resorts = [
         "location": {"lat": 46.9189, "lng": 9.1728},
         "elevation": "1020m - 2105m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/elm-im-sernftal/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Elm_Martinsloch.jpg"
+        "image_url": "https://kinderregion.ch/wp-content/uploads/2023/01/zt_43862-1200x900.jpg"
     },
     # Graubünden (Misc)
     {
@@ -397,7 +389,7 @@ ski_resorts = [
         "location": {"lat": 46.7444, "lng": 9.1217},
         "elevation": "1201m - 2310m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/obersaxen-mundaun-val-lumnezia/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Obersaxen_Mundaun.jpg"
+        "image_url": "https://media.schneemenschen.de/gallery/schneemenschen/entity/gallery/60f810244c9d593f22fcd669/204167_sessellift_obersaxen.jpg"
     },
     {
         "id": "brigels",
@@ -413,15 +405,7 @@ ski_resorts = [
         "location": {"lat": 46.5983, "lng": 9.5936},
         "elevation": "1200m - 2713m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/savognin/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Savognin_Julia.jpg"
-    },
-    {
-        "id": "bivio",
-        "name": "Bivio",
-        "location": {"lat": 46.4678, "lng": 9.6506},
-        "elevation": "1769m - 2560m",
-        "snowreport_url": "https://www.skiresort.info/ski-resort/bivio/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bivio_Village.jpg"
+        "image_url": "https://www.powderhounds.com/site/DefaultSite/filesystem/images/Europe/Switzerland/Savognin/overview/03.jpg"
     },
     {
         "id": "spluegen",
@@ -446,7 +430,7 @@ ski_resorts = [
         "location": {"lat": 46.5269, "lng": 8.6083},
         "elevation": "1175m - 2250m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/pesciuem-airolo/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Airolo.jpg"
+        "image_url": "https://www.snow-forecast.com/system/images/34311/large/2019-3_Airolo_DSC_1314.JPG?1619613600"
     },
     {
         "id": "bosco-gurin",
@@ -454,22 +438,6 @@ ski_resorts = [
         "location": {"lat": 46.3167, "lng": 8.5000},
         "elevation": "1506m - 2400m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/bosco-gurin-grossalp/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bosco_Gurin_Walser.jpg"
-    },
-    {
-        "id": "nara",
-        "name": "Nara",
-        "location": {"lat": 46.4667, "lng": 8.9167},
-        "elevation": "1400m - 2123m",
-        "snowreport_url": "https://www.skiresort.info/ski-resort/nara-leontica/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Leontica_Nara.jpg"
-    },
-    {
-        "id": "cari",
-        "name": "Carì",
-        "location": {"lat": 46.4883, "lng": 8.8167},
-        "elevation": "1650m - 2293m",
-        "snowreport_url": "https://www.skiresort.info/ski-resort/cari/snow-report/",
-        "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cari_Leventina.jpg"
+        "image_url": "https://www.ticino.ch/pictures/infoturistica/verybig4/134235-hh.jpg"
     },
 ]
