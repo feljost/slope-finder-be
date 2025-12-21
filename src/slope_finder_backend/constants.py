@@ -69,7 +69,7 @@ ski_resorts = [
         "name": "Engelberg-Titlis",
         "location": {"lat": 46.816200, "lng": 8.396476},
         "elevation": "1003m - 3020m",
-        "snowreport_url": "https://www.skiresort.info/ski-resort/engelberg-titlis/snow-report/",
+        "snowreport_url": "https://www.skiresort.info/ski-resort/titlis-engelberg/snow-report/",
         "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Titlis_Cliff_Walk.jpg"
     },
     {
