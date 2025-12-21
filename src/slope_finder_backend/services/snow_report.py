@@ -17,7 +17,7 @@ def scrape_snow_report(url: str) -> dict:
 
     soup = BeautifulSoup(response.text, "html.parser")
 
-    data = {"pistes_km": None, "lifts": None, "snow_cm": None, "updated_on": None}
+    data = {"pistes_km": None, "lifts": None, "snow_depth_cm": None, "updated_on": None}
 
     resort_info = soup.find("div", class_="overview-resort-infos")
     if resort_info:

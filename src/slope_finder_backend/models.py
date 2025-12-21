@@ -7,10 +7,10 @@ class Location(BaseModel):
 
 
 class SnowReport(BaseModel):
-    pistes_km: str
-    lifts: str
-    snow_depth_cm: str
-    updated_on: str
+    pistes_km: str | None
+    lifts: str | None
+    snow_depth_cm: str | None
+    updated_on: str | None
 
 
 class WeatherPeriod(BaseModel):
