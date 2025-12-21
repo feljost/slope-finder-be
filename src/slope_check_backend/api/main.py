@@ -32,9 +32,8 @@ def get_ski_resorts_by_distance(
     """
     if page < 1 or page_size > 10:
         return HTTPException(
-            status_code=422,
-            detail="page_size must be <= 10 and page must be >= 1"
-            )
+            status_code=422, detail="page_size must be <= 10 and page must be >= 1"
+        )
 
     # Step 1: Calculate air distance for all resorts and sort
     resorts_with_air_distance = []

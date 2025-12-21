@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 
 
-class SkiResortScraper:
+class SnowReport:
     """Simple HTTP scraper for ski resort information"""
 
     def __init__(self):
@@ -12,9 +12,11 @@ class SkiResortScraper:
         self.current_data = None
         self.session = requests.Session()
         # Set a user agent to avoid being blocked
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        })
+        self.session.headers.update(
+            {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+            }
+        )
 
     def scrape_ski_resort(self, url: str):
         """
@@ -34,7 +36,7 @@ class SkiResortScraper:
         print(f"Page fetched successfully. Status code: {response.status_code}")
 
         # Parse with BeautifulSoup
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text, "html.parser")
 
         # Extract data
         data = self.extract_resort_info(soup)
@@ -53,43 +55,46 @@ class SkiResortScraper:
             dict: Extracted information
         """
         data = {
-            'pistes_km': None,
-            'lifts': None,
-            'snow_cm': None,
-            'updated_on': None,
-            'days_old': None
+            "pistes_km": None,
+            "lifts": None,
+            "snow_cm": None,
+            "updated_on": None,
+            "days_old": None,
         }
 
         try:
             # Find the overview-resort-infos section
-            resort_info = soup.find('div', class_='overview-resort-infos')
+            resort_info = soup.find("div", class_="overview-resort-infos")
 
             if resort_info:
                 # Extract all info-item-con divs
-                info_items = resort_info.find_all('div', class_='info-item-con')
+                info_items = resort_info.find_all("div", class_="info-item-con")
 
                 for item in info_items:
-                    info_text_div = item.find('div', class_='info-text')
+                    info_text_div = item.find("div", class_="info-text")
 
                     if info_text_div:
                         text = info_text_div.get_text(strip=True)
 
                         # Check if this is the slopes/pistes info (contains icon-uE004-skirun or has "km" in text)
-                        if item.find('i', class_=re.compile('icon.*skirun')) or 'km' in text:
+                        if (
+                            item.find("i", class_=re.compile("icon.*skirun"))
+                            or "km" in text
+                        ):
                             # Extract pistes km (format: "32.3/41.2 km")
-                            data['pistes_km'] = text
+                            data["pistes_km"] = text
                             print(f"Found pistes: {text}")
 
                         # Check if this is the lift info (contains lift-icon)
-                        elif item.find('i', class_=re.compile('lift-icon')):
+                        elif item.find("i", class_=re.compile("lift-icon")):
                             # Extract lifts (format: "10/13")
-                            data['lifts'] = text
+                            data["lifts"] = text
                             print(f"Found lifts: {text}")
 
                         # Check if this is the snow info (contains fa-snowflake-o)
-                        elif item.find('i', class_='fa fa-snowflake-o'):
+                        elif item.find("i", class_="fa fa-snowflake-o"):
                             # Extract snow depth (format: "59 cm")
-                            data['snow_cm'] = text
+                            data["snow_cm"] = text
                             print(f"Found snow: {text}")
 
         except Exception as e:
@@ -97,30 +102,30 @@ class SkiResortScraper:
 
         # Extract update date
         try:
-            update_wrapper = soup.find('div', class_='update-wrapper')
+            update_wrapper = soup.find("div", class_="update-wrapper")
             if update_wrapper:
                 # Try to find the hidden div with date attribute first
-                date_div = update_wrapper.find('div', id='snowreport-update-date')
-                if date_div and date_div.get('date'):
-                    date_str = date_div.get('date')
+                date_div = update_wrapper.find("div", id="snowreport-update-date")
+                if date_div and date_div.get("date"):
+                    date_str = date_div.get("date")
                     print(f"Found update date (from attribute): {date_str}")
                 else:
                     # Fall back to finding the bold div with the date text
-                    bold_divs = update_wrapper.find_all('div', class_='bold')
+                    bold_divs = update_wrapper.find_all("div", class_="bold")
                     for div in bold_divs:
                         text = div.get_text(strip=True)
                         # Match date format like "20 Dec 2025"
-                        if re.match(r'\d{1,2}\s+\w+\s+\d{4}', text):
+                        if re.match(r"\d{1,2}\s+\w+\s+\d{4}", text):
                             date_str = text
                             print(f"Found update date (from text): {date_str}")
                             break
 
                 if date_str:
-                    data['updated_on'] = date_str
+                    data["updated_on"] = date_str
 
                     # Calculate days old
                     days_old = self.calculate_days_old(date_str)
-                    data['days_old'] = days_old
+                    data["days_old"] = days_old
                     print(f"Data is {days_old} day(s) old")
 
         except Exception as e:
@@ -140,11 +145,11 @@ class SkiResortScraper:
         """
         try:
             # Try parsing "20.12.2025" format first
-            if '.' in date_str:
-                update_date = datetime.strptime(date_str, '%d.%m.%Y')
+            if "." in date_str:
+                update_date = datetime.strptime(date_str, "%d.%m.%Y")
             else:
                 # Parse "20 Dec 2025" format
-                update_date = datetime.strptime(date_str, '%d %b %Y')
+                update_date = datetime.strptime(date_str, "%d %b %Y")
 
             today = datetime.now()
             days_difference = (today - update_date).days
@@ -157,6 +162,7 @@ class SkiResortScraper:
 
 def main():
     from slope_check_backend.constants import ski_resorts
+
     """Main function to run the scraper"""
     scraper = SkiResortScraper()
     for resort in ski_resorts:
@@ -182,6 +188,7 @@ def main():
         except Exception as e:
             print(f"Error occurred: {e}")
             import traceback
+
             traceback.print_exc()
 
 

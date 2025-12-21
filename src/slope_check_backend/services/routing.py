@@ -1,11 +1,38 @@
 import os
 
+from math import radians
+from math import sin
+from math import cos
+from math import sqrt
+from math import atan2
+
 import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
 MAPBOX_API_KEY = os.getenv("MAPBOX_API_KEY")
+
+
+def calculate_air_distance(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    """
+    Calculate the distance between two coordinates using the Haversine formula.
+    Returns distance in kilometers.
+    """
+    R = 6371  # Earth's radius in kilometers
+
+    lat1_rad = radians(lat1)
+    lat2_rad = radians(lat2)
+    delta_lat = radians(lat2 - lat1)
+    delta_lng = radians(lng2 - lng1)
+
+    a = (
+        sin(delta_lat / 2) ** 2
+        + cos(lat1_rad) * cos(lat2_rad) * sin(delta_lng / 2) ** 2
+    )
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    return R * c
 
 
 def get_driving_distances_batch(
@@ -53,10 +80,12 @@ def get_driving_distances_batch(
     results = []
     for i in range(len(destinations)):
         if durations[i] is not None and distances[i] is not None:
-            results.append({
-                "distance_km": round(distances[i] / 1000, 2),
-                "duration_minutes": round(durations[i] / 60, 1),
-            })
+            results.append(
+                {
+                    "distance_km": round(distances[i] / 1000, 2),
+                    "duration_minutes": round(durations[i] / 60, 1),
+                }
+            )
         else:
             results.append(None)
 
