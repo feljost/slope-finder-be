@@ -7,7 +7,8 @@ from slope_finder_backend.services.weather import get_weather_data
 
 
 def enrich_resorts_with_info(
-    location: Location,
+    lat: float,
+    lng: float,
     page_resorts: list[dict],
     date: str | None = None
 ) -> list[dict]:
@@ -33,7 +34,7 @@ def enrich_resorts_with_info(
     ]
 
     def fetch_driving_distances():
-        return get_driving_distances_batch(location.lat, location.lng, destinations)
+        return get_driving_distances_batch(lat, lng, destinations)
 
     def fetch_weather_data():
         weather_data = {}

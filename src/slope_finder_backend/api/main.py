@@ -20,7 +20,8 @@ async def health():
 
 @app.post("/resorts-info")
 def get_ski_resorts_by_distance(
-    location: Location,
+    lat: float,
+    lng: float,
     page: int = 1,
     page_size: int = 10,
     date: str | None = None,
@@ -51,8 +52,8 @@ def get_ski_resorts_by_distance(
     resorts_with_metadata = []
     for resort in ski_resorts:
         air_distance = calculate_air_distance(
-            location.lat,
-            location.lng,
+            lat,
+            lng,
             resort["location"]["lat"],
             resort["location"]["lng"],
         )
@@ -71,7 +72,6 @@ def get_ski_resorts_by_distance(
     # If no resorts on this page, return empty
     if not page_resorts:
         return {
-            "location": location.dict(),
             "page": page,
             "page_size": page_size,
             "total_resorts": len(ski_resorts),
@@ -80,7 +80,7 @@ def get_ski_resorts_by_distance(
         }
 
     # Step 3: Enrich resorts with driving distances, snow reports, and weather
-    resorts_with_metadata = enrich_resorts_with_info(location, page_resorts, date)
+    resorts_with_metadata = enrich_resorts_with_info(lat, lng, page_resorts, date)
 
     return {
         "page": page,
@@ -89,27 +89,3 @@ def get_ski_resorts_by_distance(
         "has_more": end_idx < len(ski_resorts),
         "resorts": resorts_with_metadata,
     }
-
-
-@app.post("/weather")
-def get_weather(request: WeatherRequest) -> WeatherData:
-    """
-    Get weather data for a specific location and date.
-
-    Returns aggregated weather conditions for three periods:
-    - Morning (8-10): Average temp, summed precipitation/snowfall, average cloud cover & visibility
-    - Midday (11-13): Average temp, summed precipitation/snowfall, average cloud cover & visibility
-    - Afternoon (14-17): Average temp, summed precipitation/snowfall, average cloud cover & visibility
-
-    Also includes total snowfall from the previous 24 hours (entire previous day).
-
-    Args:
-        request: WeatherRequest with lat, lng, and date (YYYY-MM-DD format)
-
-    Returns:
-        WeatherData with morning, midday, and afternoon weather periods, plus 24h snowfall
-    """
-    try:
-        return get_weather_data(request.lat, request.lng, request.date)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error fetching weather data: {str(e)}")
