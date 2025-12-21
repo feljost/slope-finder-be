@@ -1,12 +1,10 @@
 from fastapi import FastAPI
 from fastapi import HTTPException
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from slope_finder_backend.constants import ski_resorts
-from slope_finder_backend.services.routing import get_driving_distances_batch
 from slope_finder_backend.services.routing import calculate_air_distance
-from slope_finder_backend.services.snow_report import scrape_snow_reports_batch
 from slope_finder_backend.services.weather import get_weather_data
+from slope_finder_backend.pipelines.get_resort_info import enrich_resorts_with_info
 from slope_finder_backend.models import Location
 from slope_finder_backend.models import SkiResortsResponse
 from slope_finder_backend.models import WeatherRequest
@@ -20,7 +18,7 @@ async def health():
     return {"status": "healthy"}
 
 
-@app.post("/ski-resorts/by-distance")
+@app.post("/resorts-info")
 def get_ski_resorts_by_distance(
     location: Location,
     page: int = 1,
@@ -33,9 +31,8 @@ def get_ski_resorts_by_distance(
     Process:
     1. Sort all resorts by air distance
     2. Paginate - get resorts for the requested page
-    3. Fetch driving distances and weather data in parallel (if date is provided)
-    4. Fetch snow reports for the page
-    5. Return resorts with distance, duration, snow reports, and weather
+    3. Enrich resorts with driving distances, snow reports, and weather data
+    4. Return paginated results
 
     Supports infinite scrolling by incrementing the page parameter.
 
@@ -82,67 +79,15 @@ def get_ski_resorts_by_distance(
             "resorts": [],
         }
 
-    # Step 3: Get driving distances and weather data in parallel
-    destinations = [
-        {"lat": r["resort"]["location"]["lat"], "lng": r["resort"]["location"]["lng"]}
-        for r in page_resorts
-    ]
-
-    def fetch_driving_distances():
-        return get_driving_distances_batch(location.lat, location.lng, destinations)
-
-    def fetch_weather_data():
-        weather_data = {}
-        if date:
-            for item in page_resorts:
-                resort_lat = item["resort"]["location"]["lat"]
-                resort_lng = item["resort"]["location"]["lng"]
-                try:
-                    weather = get_weather_data(resort_lat, resort_lng, date)
-                    weather_data[item["resort"]["name"]] = weather.dict()
-                except Exception:
-                    weather_data[item["resort"]["name"]] = None
-        return weather_data
-
-    # Execute driving distances and weather fetching in parallel
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        driving_future = executor.submit(fetch_driving_distances)
-        weather_future = executor.submit(fetch_weather_data)
-
-        route_infos = driving_future.result()
-        weather_data = weather_future.result()
-
-    # Step 4: Get snow reports for this page
-    snow_reports = scrape_snow_reports_batch(
-        [r["resort"]["snowreport_url"] for r in page_resorts]
-    )
-
-    # Step 5: Build response with driving distances, snow reports & weather
-    resorts_with_distance = []
-    for i, item in enumerate(page_resorts):
-        route_info = route_infos[i]
-        if route_info:
-            resort_data = {
-                **item["resort"],
-                "air_distance_km": round(item["air_distance_km"], 2),
-                "distance_km": route_info["distance_km"],
-                "duration_minutes": route_info["duration_minutes"],
-                "snow_report": snow_reports[item["resort"]["snowreport_url"]][
-                    "data"
-                ],
-            }
-            # Add weather data if available
-            if date and item["resort"]["name"] in weather_data:
-                resort_data["weather"] = weather_data[item["resort"]["name"]]
-
-            resorts_with_distance.append(resort_data)
+    # Step 3: Enrich resorts with driving distances, snow reports, and weather
+    resorts_with_metadata = enrich_resorts_with_info(location, page_resorts, date)
 
     return {
         "page": page,
         "page_size": page_size,
         "total_resorts": len(ski_resorts),
         "has_more": end_idx < len(ski_resorts),
-        "resorts": resorts_with_distance,
+        "resorts": resorts_with_metadata,
     }
 
 
