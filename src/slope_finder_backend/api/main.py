@@ -28,13 +28,13 @@ async def health():
     return {"status": "healthy"}
 
 
-@app.post("/resorts-info")
+@app.get("/resorts-info")
 def get_ski_resorts_by_distance(
     lat: float,
     lng: float,
+    date: str,
     page: int = 1,
     page_size: int = 10,
-    date: str | None = None,
 ) -> SkiResortsResponse:
     """
     Get ski resorts ordered by driving distance from the given location with pagination.
