@@ -45,7 +45,9 @@ def get_ski_resorts_by_distance(
             resort["location"]["lat"],
             resort["location"]["lng"],
         )
-        resorts_with_metadata.append({"resort": resort, "air_distance_km": air_distance})
+        resorts_with_metadata.append(
+            {"resort": resort, "air_distance_km": air_distance}
+        )
 
     # Sort by air distance
     resorts_with_metadata.sort(key=lambda x: x["air_distance_km"])
@@ -87,7 +89,9 @@ def get_ski_resorts_by_distance(
                     "air_distance_km": round(item["air_distance_km"], 2),
                     "distance_km": route_info["distance_km"],
                     "duration_minutes": route_info["duration_minutes"],
-                    "snow_report": snow_reports[item["resort"]["snowreport_url"]]["data"],
+                    "snow_report": snow_reports[item["resort"]["snowreport_url"]][
+                        "data"
+                    ],
                 }
             )
 
