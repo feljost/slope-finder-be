@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -52,12 +54,15 @@ def get_ski_resorts_by_distance(
         lng: User's longitude
         page: Page number (default: 1)
         page_size: Number of resorts per page (max: 10)
-        date: Optional date for weather data in YYYY-MM-DD format
+        date: Date for weather data in YYYY-MM-DD format
     """
     if page < 1 or page_size > 10:
         return HTTPException(
             status_code=422, detail="page_size must be <= 10 and page must be >= 1"
         )
+
+    # Parse date string to datetime object
+    date_obj = datetime.fromisoformat(date)
 
     # Step 1: Calculate air distance for all resorts and sort
     resorts_with_metadata = []
@@ -91,7 +96,7 @@ def get_ski_resorts_by_distance(
         }
 
     # Step 3: Enrich resorts with driving distances, snow reports, and weather
-    resorts_with_metadata = enrich_resorts_with_info(lat, lng, page_resorts, date)
+    resorts_with_metadata = enrich_resorts_with_info(lat, lng, page_resorts, date_obj)
 
     return {
         "page": page,

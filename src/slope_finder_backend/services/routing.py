@@ -1,5 +1,6 @@
 import os
 
+from datetime import datetime
 from math import radians
 from math import sin
 from math import cos
@@ -12,6 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 MAPBOX_API_KEY = os.getenv("MAPBOX_API_KEY")
+GOOGLE_ROUTES_API_KEY = os.getenv("GOOGLE_ROUTES_API_KEY")
 
 
 def calculate_air_distance(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
@@ -90,3 +92,131 @@ def get_driving_distances_batch(
             results.append(None)
 
     return results
+
+
+def get_routes_batch_google(
+    origin_lat: float,
+    origin_lng: float,
+    destinations: list[dict],
+    departure_time: datetime,
+) -> list[dict]:
+    """
+    Get driving and transit routes from origin to multiple destinations using Google Routes Matrix API.
+    Makes 2 API calls total (one for DRIVE mode, one for TRANSIT mode) for all destinations.
+
+    Args:
+        origin_lat: Origin latitude
+        origin_lng: Origin longitude
+        destinations: List of dicts with 'lat' and 'lng' keys
+        departure_time: Datetime object for departure time
+
+    Returns:
+        List of dicts with driving and transit information, or None for unreachable destinations.
+        Each dict contains:
+        {
+            "driving": {"distance_km": float, "duration_minutes": float},
+            "transit": {"distance_km": float, "duration_minutes": float}
+        }
+        If a mode is not available, it will be None.
+    """
+    if not GOOGLE_ROUTES_API_KEY:
+        raise ValueError("GOOGLE_ROUTES_API_KEY not set in environment variables")
+
+    url = "https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix"
+    headers = {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": GOOGLE_ROUTES_API_KEY,
+        "X-Goog-FieldMask": "originIndex,destinationIndex,distanceMeters,duration,condition",
+    }
+
+    # Prepare origins and destinations
+    origins = [
+        {
+            "waypoint": {
+                "location": {"latLng": {"latitude": origin_lat, "longitude": origin_lng}}
+            }
+        }
+    ]
+
+    destination_list = [
+        {
+            "waypoint": {
+                "location": {"latLng": {"latitude": dest["lat"], "longitude": dest["lng"]}}
+            }
+        }
+        for dest in destinations
+    ]
+
+    # Initialize results with None for each destination
+    results = [{"driving": None, "transit": None} for _ in destinations]
+
+    # Get driving routes
+    driving_body = {
+        "origins": origins,
+        "destinations": destination_list,
+        "travelMode": "DRIVE",
+    }
+
+    try:
+        response = requests.post(url, json=driving_body, headers=headers)
+        response.raise_for_status()
+        data_list = response.json()
+
+        for data in data_list:
+            # Check if route was successful
+            if data.get("condition") == "ROUTE_EXISTS":
+                dest_index = data.get("destinationIndex", 0)
+                distance_meters = data.get("distanceMeters")
+                duration_str = data.get("duration")
+
+                if distance_meters is not None and duration_str is not None:
+                    # Parse duration string (format: "123s")
+                    duration_seconds = float(duration_str.rstrip("s"))
+                    results[dest_index]["driving"] = {
+                        "distance_km": round(distance_meters / 1000, 2),
+                        "duration_minutes": round(duration_seconds / 60, 1),
+                    }
+    except Exception as e:
+        print(f"Error fetching driving routes: {e}")
+
+    # Get transit routes
+    # Convert datetime to ISO 8601 format with Z suffix
+    departure_time_str = departure_time.isoformat() + "Z"
+    transit_body = {
+        "origins": origins,
+        "destinations": destination_list,
+        "travelMode": "TRANSIT",
+        "departureTime": departure_time_str,
+    }
+
+    try:
+        response = requests.post(url, json=transit_body, headers=headers)
+        response.raise_for_status()
+        data_list = response.json()
+
+        for data in data_list:
+            # Check if route was successful
+            if data.get("condition") == "ROUTE_EXISTS":
+                dest_index = data.get("destinationIndex", 0)
+                distance_meters = data.get("distanceMeters")
+                duration_str = data.get("duration")
+
+                if distance_meters is not None and duration_str is not None:
+                    # Parse duration string (format: "123s")
+                    duration_seconds = float(duration_str.rstrip("s"))
+                    results[dest_index]["transit"] = {
+                        "distance_km": round(distance_meters / 1000, 2),
+                        "duration_minutes": round(duration_seconds / 60, 1),
+                    }
+    except Exception as e:
+        print(f"Error fetching transit routes: {e}")
+
+    # Convert to None if both modes failed for a destination
+    final_results = []
+    for result in results:
+        if result["driving"] is None and result["transit"] is None:
+            final_results.append(None)
+        else:
+            final_results.append(result)
+
+    return final_results

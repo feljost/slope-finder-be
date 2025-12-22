@@ -45,7 +45,8 @@ class SkiResort(BaseModel):
     image_url: str
     air_distance_km: float
     distance_km: float | None
-    duration_minutes: float | None
+    duration_driving_minutes: float | None
+    duration_transit_minutes: float | None
     snow_report: SnowReport
     weather: WeatherData
 
