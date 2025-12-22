@@ -1,17 +1,18 @@
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime
+from datetime import timedelta
 
 from slope_finder_backend.models import WeatherData, WeatherPeriod, Location
 
 
-def get_weather_data(lat: float, lng: float, date: str) -> WeatherData:
+def get_weather_data(lat: float, lng: float, date: datetime) -> WeatherData:
     """
     Get weather data for a specific location and date from Open-Meteo API.
 
     Args:
         lat: Latitude of the location
         lng: Longitude of the location
-        date: Date in ISO format (YYYY-MM-DD)
+        date: Datetime object for the target date
 
     Returns:
         WeatherData object with morning, midday, and afternoon weather periods,
@@ -20,14 +21,14 @@ def get_weather_data(lat: float, lng: float, date: str) -> WeatherData:
     url = "https://api.open-meteo.com/v1/forecast"
 
     # Calculate previous day to get 24h snowfall data
-    target_date = datetime.fromisoformat(date).date()
+    target_date = date.date()
     previous_day = target_date - timedelta(days=1)
 
     params = {
         "latitude": lat,
         "longitude": lng,
         "start_date": previous_day.isoformat(),
-        "end_date": date,
+        "end_date": target_date.isoformat(),
         "hourly": [
             "temperature_2m",
             "precipitation",
