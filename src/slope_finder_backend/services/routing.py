@@ -1,5 +1,6 @@
 import os
 
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from math import radians
 from math import sin
@@ -150,66 +151,74 @@ def get_routes_batch_google(
     # Initialize results with None for each destination
     results = [{"driving": None, "transit": None} for _ in destinations]
 
-    # Get driving routes
-    driving_body = {
-        "origins": origins,
-        "destinations": destination_list,
-        "travelMode": "DRIVE",
-    }
+    def fetch_routes(travel_mode: str):
+        """
+        Fetch routes from Google API for a specific travel mode.
 
-    try:
-        response = requests.post(url, json=driving_body, headers=headers)
-        response.raise_for_status()
-        data_list = response.json()
+        Args:
+            travel_mode: Either "DRIVE" or "TRANSIT"
 
-        for data in data_list:
-            # Check if route was successful
-            if data.get("condition") == "ROUTE_EXISTS":
-                dest_index = data.get("destinationIndex", 0)
-                distance_meters = data.get("distanceMeters")
-                duration_str = data.get("duration")
+        Returns:
+            List of route data from the API, or empty list on error
+        """
+        body = {
+            "origins": origins,
+            "destinations": destination_list,
+            "travelMode": travel_mode,
+        }
 
-                if distance_meters is not None and duration_str is not None:
-                    # Parse duration string (format: "123s")
-                    duration_seconds = float(duration_str.rstrip("s"))
-                    results[dest_index]["driving"] = {
-                        "distance_km": round(distance_meters / 1000, 2),
-                        "duration_minutes": round(duration_seconds / 60, 1),
-                    }
-    except Exception as e:
-        print(f"Error fetching driving routes: {e}")
+        # Only include departure time for TRANSIT mode
+        if travel_mode == "TRANSIT":
+            departure_time_str = departure_time.isoformat() + "Z"
+            body["departureTime"] = departure_time_str
 
-    # Get transit routes
-    # Convert datetime to ISO 8601 format with Z suffix
-    departure_time_str = departure_time.isoformat() + "Z"
-    transit_body = {
-        "origins": origins,
-        "destinations": destination_list,
-        "travelMode": "TRANSIT",
-        "departureTime": departure_time_str,
-    }
+        try:
+            response = requests.post(url, json=body, headers=headers)
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            print(f"Error fetching {travel_mode.lower()} routes: {e}")
+            return []
 
-    try:
-        response = requests.post(url, json=transit_body, headers=headers)
-        response.raise_for_status()
-        data_list = response.json()
+    # Execute both API calls in parallel
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        driving_future = executor.submit(fetch_routes, "DRIVE")
+        transit_future = executor.submit(fetch_routes, "TRANSIT")
 
-        for data in data_list:
-            # Check if route was successful
-            if data.get("condition") == "ROUTE_EXISTS":
-                dest_index = data.get("destinationIndex", 0)
-                distance_meters = data.get("distanceMeters")
-                duration_str = data.get("duration")
+        driving_data_list = driving_future.result()
+        transit_data_list = transit_future.result()
 
-                if distance_meters is not None and duration_str is not None:
-                    # Parse duration string (format: "123s")
-                    duration_seconds = float(duration_str.rstrip("s"))
-                    results[dest_index]["transit"] = {
-                        "distance_km": round(distance_meters / 1000, 2),
-                        "duration_minutes": round(duration_seconds / 60, 1),
-                    }
-    except Exception as e:
-        print(f"Error fetching transit routes: {e}")
+    # Process driving routes
+    for data in driving_data_list:
+        # Check if route was successful
+        if data.get("condition") == "ROUTE_EXISTS":
+            dest_index = data.get("destinationIndex", 0)
+            distance_meters = data.get("distanceMeters")
+            duration_str = data.get("duration")
+
+            if distance_meters is not None and duration_str is not None:
+                # Parse duration string (format: "123s")
+                duration_seconds = float(duration_str.rstrip("s"))
+                results[dest_index]["driving"] = {
+                    "distance_km": round(distance_meters / 1000, 2),
+                    "duration_minutes": round(duration_seconds / 60, 1),
+                }
+
+    # Process transit routes
+    for data in transit_data_list:
+        # Check if route was successful
+        if data.get("condition") == "ROUTE_EXISTS":
+            dest_index = data.get("destinationIndex", 0)
+            distance_meters = data.get("distanceMeters")
+            duration_str = data.get("duration")
+
+            if distance_meters is not None and duration_str is not None:
+                # Parse duration string (format: "123s")
+                duration_seconds = float(duration_str.rstrip("s"))
+                results[dest_index]["transit"] = {
+                    "distance_km": round(distance_meters / 1000, 2),
+                    "duration_minutes": round(duration_seconds / 60, 1),
+                }
 
     # Convert to None if both modes failed for a destination
     final_results = []
