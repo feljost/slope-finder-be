@@ -85,6 +85,8 @@ def enrich_resorts_with_info(
                     ),
                 "duration_driving_minutes": route_info["driving"]["duration_minutes"],
                 "duration_transit_minutes": route_info["transit"]["duration_minutes"],
+                "maps_directions_url_driving": route_info["driving"]["maps_directions_url"],
+                "maps_directions_url_transit": route_info["transit"]["maps_directions_url"],
                 "snow_report": snow_reports[item["resort"]["snowreport_url"]]["data"],
             }
             # Add weather data if available

@@ -115,10 +115,18 @@ def get_routes_batch_google(
         List of dicts with driving and transit information, or None for unreachable destinations.
         Each dict contains:
         {
-            "driving": {"distance_km": float, "duration_minutes": float},
-            "transit": {"distance_km": float, "duration_minutes": float}
+            "driving": {
+                "distance_km": float,
+                "duration_minutes": float,
+                "maps_directions_url": str
+            },
+            "transit": {
+                "distance_km": float,
+                "duration_minutes": float,
+                "maps_directions_url": str
+            }
         }
-        If a mode is not available, it will be None.
+        If a mode is not available, the values will be None.
     """
     if not GOOGLE_ROUTES_API_KEY:
         raise ValueError("GOOGLE_ROUTES_API_KEY not set in environment variables")
@@ -151,8 +159,8 @@ def get_routes_batch_google(
     # Initialize results with None values for each destination
     results = [
         {
-            "driving": {"distance_km": None, "duration_minutes": None},
-            "transit": {"distance_km": None, "duration_minutes": None}
+            "driving": {"distance_km": None, "duration_minutes": None, "maps_directions_url": None},
+            "transit": {"distance_km": None, "duration_minutes": None, "maps_directions_url": None}
         }
         for _ in destinations
     ]
@@ -205,8 +213,16 @@ def get_routes_batch_google(
             if distance_meters is not None and duration_str is not None:
                 # Parse duration string (format: "123s")
                 duration_seconds = float(duration_str.rstrip("s"))
+                dest = destinations[dest_index]
+
                 results[dest_index]["driving"]["distance_km"] = round(distance_meters / 1000, 2)
                 results[dest_index]["driving"]["duration_minutes"] = round(duration_seconds / 60, 1)
+                results[dest_index]["driving"]["maps_directions_url"] = (
+                    f"https://www.google.com/maps/dir/?api=1"
+                    f"&origin={origin_lat},{origin_lng}"
+                    f"&destination={dest['lat']},{dest['lng']}"
+                    f"&travelmode=driving"
+                )
 
     # Process transit routes
     for data in transit_data_list:
@@ -219,8 +235,16 @@ def get_routes_batch_google(
             if distance_meters is not None and duration_str is not None:
                 # Parse duration string (format: "123s")
                 duration_seconds = float(duration_str.rstrip("s"))
+                dest = destinations[dest_index]
+
                 results[dest_index]["transit"]["distance_km"] = round(distance_meters / 1000, 2)
                 results[dest_index]["transit"]["duration_minutes"] = round(duration_seconds / 60, 1)
+                results[dest_index]["transit"]["maps_directions_url"] = (
+                    f"https://www.google.com/maps/dir/?api=1"
+                    f"&origin={origin_lat},{origin_lng}"
+                    f"&destination={dest['lat']},{dest['lng']}"
+                    f"&travelmode=transit"
+                )
 
     # Convert to None if both modes failed for a destination
     final_results = []
