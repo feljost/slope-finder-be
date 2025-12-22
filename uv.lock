@@ -355,7 +355,7 @@ wheels = [
 ]
 
 [[package]]
-name = "slope-finder-backend"
+name = "slope-finder-be"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

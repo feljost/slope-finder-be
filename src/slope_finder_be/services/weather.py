@@ -2,7 +2,7 @@ import requests
 from datetime import datetime
 from datetime import timedelta
 
-from slope_finder_backend.models import WeatherData, WeatherPeriod, Location
+from slope_finder_be.models import WeatherData, WeatherPeriod, Location
 
 
 def get_weather_data(lat: float, lng: float, date: datetime) -> WeatherData:

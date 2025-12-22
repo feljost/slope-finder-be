@@ -1,10 +1,10 @@
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
-from slope_finder_backend.models import Location
-from slope_finder_backend.services.routing import get_routes_batch_google
-from slope_finder_backend.services.snow_report import scrape_snow_reports_batch
-from slope_finder_backend.services.weather import get_weather_data
+from slope_finder_be.models import Location
+from slope_finder_be.services.routing import get_routes_batch_google
+from slope_finder_be.services.snow_report import scrape_snow_reports_batch
+from slope_finder_be.services.weather import get_weather_data
 
 
 def enrich_resorts_with_info(

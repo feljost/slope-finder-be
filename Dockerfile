@@ -10,4 +10,4 @@ COPY . .
 RUN uv pip install --system -e .
 
 # Run the application (PORT is set by Google Cloud Run)
-CMD uvicorn slope_finder_backend.api.main:app --host 0.0.0.0 --port ${PORT}
+CMD uvicorn slope_finder_be.api.main:app --host 0.0.0.0 --port ${PORT}

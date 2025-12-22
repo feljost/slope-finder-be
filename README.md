@@ -54,7 +54,7 @@ Locally you can run the backend with `uv`
 ```shell
 uv venv
 uv pip install -e .
-uvicorn slope_finder_backend.api.main:app
+uvicorn slope_finder_be.api.main:app
 ```
 
 If you want to deploy it, you may use the `Dockerfile`. It is currently setup for Google Cloud Run.

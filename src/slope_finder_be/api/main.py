@@ -4,14 +4,14 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from slope_finder_backend.constants import ski_resorts
-from slope_finder_backend.services.routing import calculate_air_distance
-from slope_finder_backend.services.weather import get_weather_data
-from slope_finder_backend.pipelines.get_resort_info import enrich_resorts_with_info
-from slope_finder_backend.models import Location
-from slope_finder_backend.models import SkiResortsResponse
-from slope_finder_backend.models import WeatherRequest
-from slope_finder_backend.models import WeatherData
+from slope_finder_be.constants import ski_resorts
+from slope_finder_be.services.routing import calculate_air_distance
+from slope_finder_be.services.weather import get_weather_data
+from slope_finder_be.pipelines.get_resort_info import enrich_resorts_with_info
+from slope_finder_be.models import Location
+from slope_finder_be.models import SkiResortsResponse
+from slope_finder_be.models import WeatherRequest
+from slope_finder_be.models import WeatherData
 
 app = FastAPI(title="Slope Finder Backend")
 
