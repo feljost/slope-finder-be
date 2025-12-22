@@ -290,7 +290,7 @@ ski_resorts = [
         "name": "Leysin - Les Mosses",
         "location": {"lat": 46.3428, "lng": 7.0117},
         "elevation": "1250m - 2331m",
-        "snowreport_url": "https://www.skiresort.info/ski-resort/leysin-les-mosses/snow-report/",
+        "snowreport_url": "https://www.skiresort.info/ski-resort/leysin/snow-report/",
         "image_url": "https://static.mycity.travel/manage/uploads/6/33/596360/2/ski-a-leyin_2000.jpg"
     },
     {
