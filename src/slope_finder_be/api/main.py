@@ -37,6 +37,7 @@ def get_ski_resorts_by_distance(
     date: str,
     page: int = 1,
     page_size: int = 10,
+    max_air_distance_km: float = 100,
 ) -> SkiResortsResponse:
     """
     Get ski resorts ordered by driving distance from the given location with pagination.
@@ -73,9 +74,10 @@ def get_ski_resorts_by_distance(
             resort["location"]["lat"],
             resort["location"]["lng"],
         )
-        resorts_with_metadata.append(
-            {"resort": resort, "air_distance_km": air_distance}
-        )
+        if air_distance < max_air_distance_km:
+            resorts_with_metadata.append(
+                {"resort": resort, "air_distance_km": air_distance}
+            )
 
     # Sort by air distance
     resorts_with_metadata.sort(key=lambda x: x["air_distance_km"])
@@ -85,12 +87,14 @@ def get_ski_resorts_by_distance(
     end_idx = start_idx + page_size
     page_resorts = resorts_with_metadata[start_idx:end_idx]
 
+    total_filtered = len(resorts_with_metadata)
+
     # If no resorts on this page, return empty
     if not page_resorts:
         return {
             "page": page,
             "page_size": page_size,
-            "total_resorts": len(ski_resorts),
+            "total_resorts": total_filtered,
             "has_more": False,
             "resorts": [],
         }
@@ -101,7 +105,7 @@ def get_ski_resorts_by_distance(
     return {
         "page": page,
         "page_size": page_size,
-        "total_resorts": len(ski_resorts),
-        "has_more": end_idx < len(ski_resorts),
+        "total_resorts": total_filtered,
+        "has_more": end_idx < total_filtered,
         "resorts": resorts_with_metadata,
     }
