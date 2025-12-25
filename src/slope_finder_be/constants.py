@@ -151,7 +151,7 @@ ski_resorts = [
         "id": "flumserberg",
         "name": "Flumserberg",
         "location": {"lat": 47.11329170670742, "lng": 9.254671168447087},
-        "elevation": "1220m - 2222m",Champéry, 1874
+        "elevation": "1220m - 2222m",
         "snowreport_url": "https://www.skiresort.info/ski-resort/flumserberg/snow-report/",
     },
     # Portes du Soleil

@@ -35,7 +35,6 @@ Returns paginated ski resorts sorted by distance.
       "location": {"lat": 46.0207, "lng": 7.7491},
       "elevation": "1620m - 3883m",
       "snowreport_url": "...",
-      "image_url": "...",
       "air_distance_km": 45.2,
       "distance_km": 67.8,
       "duration_minutes": 52,
