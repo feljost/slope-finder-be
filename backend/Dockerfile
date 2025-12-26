@@ -5,7 +5,8 @@ FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 WORKDIR /app
 
 # Copy the files
-COPY . .
+# COPY . .
+COPY /backend .
 
 RUN uv pip install --system -e .
 
