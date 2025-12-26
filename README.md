@@ -5,18 +5,17 @@
 **Find the perfect Swiss ski resort based on your location and travel dates.**
 
 [![Website](https://img.shields.io/badge/Live_Site-slopefinder.ch-blue?style=for-the-badge&logo=google-chrome)](https://slopefinder.ch)
-[![License](https://img.shields.io/badge/License-MIT-gray?style=for-the-badge)](./LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
 
-[![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![uv](https://img.shields.io/badge/uv-DE5FE9?style=flat-square&logo=uv&logoColor=white)](https://docs.astral.sh/uv/)
+[![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![uv](https://img.shields.io/badge/uv-DE5FE9?logo=uv&logoColor=white)](https://docs.astral.sh/uv/)
 
 </div>
 
----
 
 ## 🏔️ About The Project
 
@@ -26,13 +25,12 @@ Simply enter your location and date, and the application provides a ranked list 
 
 ## ✨ Key Features
 
-* **Smart Travel Routing:** Calculates both air distance and driving duration from your specific location to the resort.
+* **Smart Travel Routing:** Calculates distance and driving or transit duration from your specific location to the resort.
 * **Live Conditions:** Real-time snow depths, piste status, and lift information.
 * **Weather Intelligence:** 24h forecasts including snowfall, temperature, and visibility.
 * **Responsive UI:** Infinite scrolling lists and mobile-optimized design.
 * **Search & Filter:** Filter resorts by availability and travel dates.
 
----
 
 ## 🛠️ Architecture & Tech Stack
 
@@ -43,8 +41,6 @@ The project is split into two distinct services, both containerized for deployme
 | **Frontend** | React, TypeScript, Vite | A responsive SPA that handles location inputs and displays resort cards. |
 | **Backend** | Python, FastAPI, uv | REST API that aggregates weather data, calculates geodesic distances, and manages resort metadata. |
 | **Infra** | Docker, Google Cloud Run | Stateless container deployment. |
-
----
 
 ## 🚀 Getting Started
 
