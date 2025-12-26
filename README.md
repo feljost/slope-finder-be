@@ -34,7 +34,7 @@ Simply enter your location and date, and the application provides a ranked list 
 ## Mobile Demo
 
 <div align="center">
-  <video src=".github/assets/demo-mobile.mp4" controls width="300"></video>
+  <img src="assets/demo-mobile.gif" alt="Mobile Demo" width="300">
 </div>
 
 ## 🛠️ Architecture & Tech Stack
