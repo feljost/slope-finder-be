@@ -37,7 +37,7 @@ def get_ski_resorts_by_distance(
     date: str,
     page: int = 1,
     page_size: int = 10,
-    max_air_distance_km: float = 100,
+    max_air_distance_km: float = 150,
 ) -> SkiResortsResponse:
     """
     Get ski resorts ordered by driving distance from the given location with pagination.
